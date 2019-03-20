@@ -1,0 +1,52 @@
+请求
+{
+    // 请求类型 "signIn"|"signOut"|"get"|"set"
+    type: String,
+    // 请求指定设备ID undefined|[]|[1,2,3]
+    id: undefined | Array<Number>,
+    // 请求指定属性 "os0"|"topo"|"info"|["ip","hostname"]
+    attr: String | Array<String>,
+    // 传入参数
+    value: {},
+}
+
+    登录
+    {
+        type: "signIn",
+        value: {
+            ac: String,
+            pw: String
+        }
+    }
+
+    退出
+    { 
+        type: "signOut"
+    }
+
+    获取局域网概况
+    {
+        type: "get",
+        attr: "info"
+    }
+
+    获取设备数据
+    {
+        type: "get",
+        id: undefined | Array<Number>,
+        attr: String | Array<String>
+    }
+
+    获取拓扑数据
+    {
+        type: "get",
+        attr: "topo"
+    }
+
+响应
+{
+    // 响应类型 "log"|"signIn"|"data-info"|"data-os0"|"data-topo"
+    type: String,
+    // 响应信息
+    data: {}|[]
+}
