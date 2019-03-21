@@ -14,7 +14,7 @@ function parse(req,wsInfo){
             case 'set':
             case 'signOut':
             // 未登录
-            global.WSEmitter.emit('send',errLog(0),wsInfo);
+            global.WSEmitter.emit('send',errLog(100),wsInfo);
             return;
 
             case 'signIn':
@@ -23,7 +23,7 @@ function parse(req,wsInfo){
             
             default:
             // 未知请求
-            global.WSEmitter.emit('send',errLog(1),wsInfo);
+            global.WSEmitter.emit('send',errLog(200),wsInfo);
             return;
         }
     }
@@ -34,14 +34,14 @@ function parse(req,wsInfo){
             case 'get':
             if(wsInfo.authority<1)
             // 权限不足
-            global.WSEmitter.emit('send',errLog(3),wsInfo);
+            global.WSEmitter.emit('send',errLog(104),wsInfo);
             else getter(req,wsInfo);
             return;
 
             case 'set':
             if(wsInfo.authority<2)
             // 权限不足
-            global.WSEmitter.emit('send',errLog(3),wsInfo);
+            global.WSEmitter.emit('send',errLog(104),wsInfo);
             else setter(req,wsInfo);
             return;
 
@@ -51,12 +51,12 @@ function parse(req,wsInfo){
 
             case 'signIn':
             // 重复登录
-            global.WSEmitter.emit('send',errLog(2),wsInfo);
+            global.WSEmitter.emit('send',errLog(103),wsInfo);
             return;
 
             default:
             // 未知请求
-            global.WSEmitter.emit('send',errLog(1),wsInfo);
+            global.WSEmitter.emit('send',errLog(200),wsInfo);
             return;
         }
     }

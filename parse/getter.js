@@ -14,7 +14,7 @@ function getter(req,wsInfo){
         // 表名无效
         else{
             // 无效属性类型
-            global.WSEmitter.emit('send',errLog(4),wsInfo);
+            global.WSEmitter.emit('send',errLog(201),wsInfo);
             return;
         }
     }
@@ -28,7 +28,7 @@ function getter(req,wsInfo){
         // 属性不同表或存在无效
         else{
             // 无效属性类型
-            global.WSEmitter.emit('send',errLog(4),wsInfo);
+            global.WSEmitter.emit('send',errLog(201),wsInfo);
             return;
         }
     }

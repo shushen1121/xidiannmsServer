@@ -19,7 +19,7 @@ global.DBEmitter.on('request',function(cmd,form,wsInfo){
     connection.query(cmd,function(err,res){
         if(err){
             // 数据库错误
-            global.WSEmitter.emit('send',errLog(5),wsInfo);
+            global.WSEmitter.emit('send',errLog(300),wsInfo);
         }else{
             var resRes={
                 type:'data-'+form,data:res
@@ -37,17 +37,17 @@ global.DBEmitter.on('signin',function(cmd,value,wsInfo){
     connection.query(cmd,function(err,res){
         if(err){
             // 数据库错误
-            global.WSEmitter.emit('send',errLog(5),wsInfo);
+            global.WSEmitter.emit('send',errLog(300),wsInfo);
         }else{
             // 数据库返回空
             if(res.length==0){
                 // 账号不存在
-                global.WSEmitter.emit('send',errLog(6),wsInfo);
+                global.WSEmitter.emit('send',errLog(101),wsInfo);
             }
             // 密码不相同
             else if(res[0].password!=value.pw){
                 // 密码错误
-                global.WSEmitter.emit('send',errLog(7),wsInfo);
+                global.WSEmitter.emit('send',errLog(102),wsInfo);
             }
             // 密码相同
             else if(res[0].password==value.pw){
@@ -61,7 +61,7 @@ global.DBEmitter.on('signin',function(cmd,value,wsInfo){
             // 其他未知错误
             else{
                 // 未知错误
-                global.WSEmitter.emit('send',errLog(8),wsInfo);
+                global.WSEmitter.emit('send',errLog(200),wsInfo);
             }
         }
     })

@@ -6,7 +6,7 @@ global.WSEmitter=new events.EventEmitter();
 global.DBEmitter=new events.EventEmitter();
 
 // 导入socket组件
-const socket=require('./socket/socket');
+const webSocket=require('./socket/webSocket');
 const wsEmitter=require('./socket/wsEmitter');
 // 导入dataBase组件
 const dataBase=require('./data/mysql');
