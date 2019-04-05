@@ -192,9 +192,6 @@ INSERT INTO machine VALUES (41, 1, 'V9382', '37.0.244.58', '37.0.244.58', 22.10,
 INSERT INTO machine VALUES (42, 1, 'SCOQ', '37.0.244.46', '37.0.244.46', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW());
 INSERT INTO machine VALUES (43, 1, '09PQ', '172.16.1.38', '37.0.244.21', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW());
 
-
-
-
 /*
 * 链路表
 */
@@ -218,3 +215,50 @@ CREATE TABLE `link` (
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
   PRIMARY KEY (`link_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='链路表';
+
+SET @Source_port = 'GigabitEthernet2/1/1.20';
+SET @To_port = 'atm1/0';
+
+INSERT INTO `link` VALUES (1, 0, 2, 4, @Source_port, 27, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (2, 0, 2, 27, @Source_port, 5, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (3, 0, 2, 22, @Source_port, 20, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (4, 0, 2, 27, @Source_port, 23, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (5, 0, 2, 34, @Source_port, 43, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (6, 0, 2, 43, @Source_port, 39, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (7, 0, 2, 43, @Source_port, 28, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (8, 0, 2, 43, @Source_port, 37, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (9, 0, 2, 12, @Source_port, 27, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (10, 0, 2, 43, @Source_port, 35, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (11, 0, 2, 27, @Source_port, 6, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (12, 0, 2, 27, @Source_port, 15, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (13, 0, 2, 43, @Source_port, 27, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (14, 0, 2, 43, @Source_port, 32, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (15, 0, 2, 27, @Source_port, 14, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (16, 0, 2, 27, @Source_port, 18, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (17, 0, 2, 27, @Source_port, 24, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (18, 0, 2, 43, @Source_port, 29, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (19, 0, 2, 43, @Source_port, 36, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (20, 0, 2, 43, @Source_port, 42, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (21, 0, 2, 43, @Source_port, 31, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (22, 0, 2, 27, @Source_port, 16, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (23, 0, 2, 27, @Source_port, 26, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (24, 0, 2, 43, @Source_port, 41, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (25, 0, 2, 27, @Source_port, 22, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (26, 0, 2, 27, @Source_port, 17, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (27, 0, 2, 43, @Source_port, 38, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (28, 0, 2, 27, @Source_port, 9, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (29, 0, 2, 43, @Source_port, 30, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (30, 0, 2, 27, @Source_port, 11, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (31, 0, 2, 3, @Source_port, 2, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (32, 0, 2, 2, @Source_port, 1, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (33, 0, 2, 4, @Source_port, 3, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (34, 0, 2, 27, @Source_port, 10, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (35, 0, 2, 43, @Source_port, 33, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (36, 0, 2, 43, @Source_port, 40, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (37, 0, 2, 27, @Source_port, 25, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (37, 0, 2, 27, @Source_port, 25, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (38, 0, 2, 22, @Source_port, 19, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (39, 0, 2, 22, @Source_port, 21, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (40, 0, 2, 9, @Source_port, 7, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (41, 0, 2, 14, @Source_port, 13, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
+INSERT INTO `link` VALUES (42, 0, 2, 9, @Source_port, 8, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
