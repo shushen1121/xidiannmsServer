@@ -256,7 +256,6 @@ INSERT INTO `link` VALUES (34, 0, 2, 27, @Source_port, 10, @To_port, 24, 25.2, 1
 INSERT INTO `link` VALUES (35, 0, 2, 43, @Source_port, 33, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
 INSERT INTO `link` VALUES (36, 0, 2, 43, @Source_port, 40, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
 INSERT INTO `link` VALUES (37, 0, 2, 27, @Source_port, 25, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
-INSERT INTO `link` VALUES (37, 0, 2, 27, @Source_port, 25, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
 INSERT INTO `link` VALUES (38, 0, 2, 22, @Source_port, 19, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
 INSERT INTO `link` VALUES (39, 0, 2, 22, @Source_port, 21, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
 INSERT INTO `link` VALUES (40, 0, 2, 9, @Source_port, 7, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW());
