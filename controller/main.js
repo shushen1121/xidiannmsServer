@@ -13,9 +13,23 @@ app.use(session({
   cookie: 60*60*1000
 }));
 
+
+app.all('*', function(req, res, next) {
+ 
+  res.header("Access-Control-Allow-Origin", "*");//项目上线后改成页面的地址
+   
+  res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
+   
+  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+   
+  next();
+   
+});
+
 // 登录
 const ctl_signIn = require('./ctl_signIn');
 app.post('/signIn',function(req, res){
+  console.log(req.body)
   ctl_signIn(req, res);
 })
 
@@ -47,4 +61,4 @@ app.post('/getWarning',function(req, res){
   ctl_getWarning(req, res);
 })
 
-app.listen(8080);
+app.listen(3000);
