@@ -29,7 +29,7 @@ INSERT INTO `account` VALUES (5, 'admin3', 'admin3', '328958920@qq.com', 2, now(
 DROP TABLE IF EXISTS `warning_level`;
 CREATE TABLE `warning_level` (
   `warning_level_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `level` INT(11) NOT NULL DEFAULT 0 COMMENT '告警级别' UNIQUE ,
+  `warning_level` INT(11) NOT NULL DEFAULT 0 COMMENT '告警级别' UNIQUE ,
   `description` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '告警级别描述',
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
