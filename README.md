@@ -6,7 +6,6 @@ xidian Network Management System Server
 
 # 启动
 > npm install
-
 > node index.js
 
 # 依赖
