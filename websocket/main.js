@@ -2,8 +2,8 @@ const WebSocket = require('ws');
 const wsSend = require('./send'),
       wsMessage = require('./message');
 
-const wss=new WebSocket.Server({port:3001});
-console.log('webSocket port:3001');
+const wss=new WebSocket.Server({port:3000});
+console.log('webSocket port:3000');
 
 // ws连接成功
 wss.on('connection',function(ws,info){
