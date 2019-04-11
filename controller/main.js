@@ -33,3 +33,4 @@ const sign=require('./route/sign')(app),
       static=require('./route/static')(app);
 
 app.listen(3000);
+console.log('http port:3000');
