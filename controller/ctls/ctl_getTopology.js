@@ -1,4 +1,4 @@
-const dbUtil=require('../utils/dbUtil');
+const dbUtil=require('../../utils/dbUtil');
 
 module.exports=function(req,res){
   // 初始化响应数据

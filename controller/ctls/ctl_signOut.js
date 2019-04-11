@@ -4,7 +4,6 @@ module.exports=function(req,res){
     message:undefined,
     data:undefined
   }
-
   if(req.session.account){
     req.session.authority=undefined;
     req.session.account=undefined;

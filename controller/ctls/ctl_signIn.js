@@ -4,7 +4,7 @@ module.exports=function(req,res){
     code:undefined,
     message:undefined,
     data:{
-      webSocketId:undefined
+      sessionId:undefined
     }
   }
 
@@ -22,8 +22,14 @@ module.exports=function(req,res){
   // 成功回调
   function resCallback(dbRes){
     // 账号不存在
-    if(!dbRes[0]){
+    if(req.session.account){
       resData.code=201;
+      resData.message='登录失败';
+      resData.data='已登录';
+    }
+    // 账号不存在
+    else if(!dbRes[0]){
+      resData.code=202;
       resData.message='登录失败';
       resData.data='账号不存在';
     }
@@ -31,13 +37,13 @@ module.exports=function(req,res){
     else if(dbRes[0].password==req.body.password){
       resData.code=200;
       resData.message='登录成功';
-      resData.data.webSocketId=req.session.id;
+      resData.data.sessionId=req.session.id;
       req.session.authority=dbRes[0].authority;
       req.session.account=req.body.account;
     }
     // 账号或密码错误
     else{
-      resData.code=202;
+      resData.code=203;
       resData.message='登录失败';
       resData.data='账号或密码错误';
     }
