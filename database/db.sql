@@ -1,3 +1,6 @@
+DROP DATABASE IF EXISTS `xidiannms_session`;
+CREATE DATABASE `xidiannms_session`;
+
 DROP DATABASE IF EXISTS `xidiannms`;
 CREATE DATABASE `xidiannms`;
 USE `xidiannms`;
@@ -22,6 +25,29 @@ INSERT INTO `account` VALUES (2, 'account', 'password', '535289218@qq.com', 2, n
 INSERT INTO `account` VALUES (3, 'admin1', 'admin1', '893289434@qq.com', 1, now(), now());
 INSERT INTO `account` VALUES (4, 'admin2', 'admin2', '435363666@qq.com', 2, now(), now());
 INSERT INTO `account` VALUES (5, 'admin3', 'admin3', '328958920@qq.com', 2, now(), now());
+
+/*
+告警信息表
+*/
+DROP TABLE IF EXISTS `warning`;
+CREATE TABLE `warning` (
+  `warning_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `warning_level` INT(11) NOT NULL DEFAULT 0 COMMENT '告警级别',
+  `warning_type` INT(11) NOT NULL DEFAULT 0 COMMENT '告警类型',
+  `create_way` INT(11) NOT NULL DEFAULT 0 COMMENT '产生方式',
+  `warning_aim` VARCHAR(255) NOT NULL default 'machine' COMMENT '告警目标类型',
+  `warning_aim_id` INT(11) NOT NULL default 0 COMMENT '告警目标ID',
+  `warning_time` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '告警时间',
+  `warning_end` tinyint(1) NOT NULL default 0 COMMENT '告警是否结束',
+  `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
+  `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
+
+  PRIMARY KEY (`warning_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='告警信息表';
+
+INSERT INTO `warning` VALUES (1, 1, 1, 1, 'link', 3, NOW(), 0, NOW(), NOW());
+INSERT INTO `warning` VALUES (2, 2, 2, 1, 'link', 5, NOW(), 1, NOW(), NOW());
+INSERT INTO `warning` VALUES (3, 3, 1, 1, 'machine', 7, NOW(), 0, NOW(), NOW());
 
 /*
 告警级别表
