@@ -19,18 +19,20 @@ app.use(session({
   cookie: 60*60*1000
 }));
 // CORS
-app.all('*', function(req, res, next) {
-  res.header("Access-Control-Allow-Origin", "*"); //项目上线后改成页面的地址
-  res.header("Access-Control-Allow-Headers", "X-Requested-With,Content-Type");
-  res.header("Access-Control-Allow-Credentials", true); //跨域访问cookie
-  res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+app.use(function(req, res, next){
+	res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8080');
+	res.setHeader('Access-Control-Allow-Credentials', true);
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
   next();
-});
-
+})
+//静态网页，地址:'/'
+app.use('/',express.static('public'));
+// API
 const sign=require('./route/sign')(app),
       getter=require('./route/getter')(app),
       setter=require('./route/setter')(app),
       static=require('./route/static')(app);
 
-app.listen(3000);
-console.log('http port:3000');
+app.listen(8000);
+console.log('http port:8000');
