@@ -14,7 +14,6 @@ module.exports=function(ws){
       ws.send(JSON.stringify(wsRes));
       return;
     }
-    
 
     if(data.token){
       global.wsToken(data.token,errCallback,resCallback);
@@ -37,6 +36,8 @@ module.exports=function(ws){
         ws.token=data.token;
       }
       ws.send(JSON.stringify(wsRes));
+
+      global.ws.push(ws);
     }
   });
 }

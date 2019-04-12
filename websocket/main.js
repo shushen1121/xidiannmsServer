@@ -5,6 +5,9 @@ const wsSend = require('./send'),
 const wss=new WebSocket.Server({port:3000});
 console.log('webSocket port:3000');
 
+global.ws=[];
+wsSend();
+
 // ws连接成功
 wss.on('connection',function(ws,info){
   // 初始化token
@@ -12,6 +15,5 @@ wss.on('connection',function(ws,info){
   // 返回wsKey
   var wsRes={ message:'wsInfo', data:{ name:'wskey', results:info.headers['sec-websocket-key'] } };
   ws.send(JSON.stringify(wsRes));
-  wsSend(ws);
   wsMessage(ws);
 })
