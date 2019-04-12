@@ -5,13 +5,13 @@ var connection=mysql.createConnection(dbInfo);
 // 连接数据库
 connection.connect();
 
-global.dbQuery=function(cmd,errCallback,resCallback){
+global.dbQuery=function(cmd,errCallback,resCallback,args){
 
   connection.query(cmd,function(err,res){
     if(err){
       errCallback();
     }else{
-      resCallback(res);
+      resCallback(res,args);
     }
   })
 }
