@@ -16,8 +16,8 @@ module.exports=function(ws){
     }
     
 
-    if(data.sessionId){
-      global.wsToken(data.sessionId,errCallback,resCallback);
+    if(data.token){
+      global.wsToken(data.token,errCallback,resCallback);
     }else{
       var wsRes={ code:302, message:'token', data:'无效参数' };
       ws.send(JSON.stringify(wsRes));
@@ -34,7 +34,7 @@ module.exports=function(ws){
         wsRes={ code:304, message:'token', data:'无权限连接' };
       }else{
         wsRes={ code:200, message:'token', data:'获取权限成功' };
-        ws.token=data.sessionId;
+        ws.token=data.token;
       }
       ws.send(JSON.stringify(wsRes));
     }

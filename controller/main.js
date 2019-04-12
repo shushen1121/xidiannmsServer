@@ -16,7 +16,7 @@ app.use(session({
   resave: true,
   saveUninitialized: false,
   store:new MySQLStore(dbInfo),
-  cookie: 60*60*1000
+  // cookie: 60*1000
 }));
 // CORS
 app.use(function(req, res, next){

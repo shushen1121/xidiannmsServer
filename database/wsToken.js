@@ -6,7 +6,7 @@ var connection=mysql.createConnection(dbInfo);
 connection.connect();
 
 global.wsToken=function(sessionId,errCallback,resCallback){
-  var cmd=`select session_id from account where session_id='${sessionId}'`;
+  var cmd=`select session_id from sessions where session_id='${sessionId}'`;
   connection.query(cmd,function(err,res){
     if(err){
       errCallback();

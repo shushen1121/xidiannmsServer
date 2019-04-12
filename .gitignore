@@ -2,5 +2,5 @@
 .gitignore
 .idea/
 /node_modules
-/public
+/public/
 package-lock.json
