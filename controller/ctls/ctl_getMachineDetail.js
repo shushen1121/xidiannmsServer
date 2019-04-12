@@ -13,15 +13,18 @@ module.exports=function(req,res){
     res.json(resData);
     return;
   }
-  // 必要参数不为空
-  if(!req.body.machine_id){
+  // 参数为空或无效
+  if(!(req.body.machine_id instanceof Array)){
     resData=logInfo.log_302;
     res.json(resData);
     return;
   }else{
-    var cmd=`select * from machine where machine_id=${req.body.machine_id}`;
+    var cmd=`select * from machine where mark_delete=0`;
+    if(req.body.machine_id.length!=0){
+      cmd+=` and machine_id in (${req.body.machine_id.join(',')})`;
+    }
   }
-
+  // console.log(cmd);
   // 执行数据库命令
   global.dbQuery(cmd,errCallback,resCallback);
 

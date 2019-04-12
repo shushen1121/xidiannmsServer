@@ -15,9 +15,9 @@ module.exports=function(req,res){
     return;
   }
 
-  var cmd='select link_id,link_type,link_status,from_machine,to_machine from link;\
-          select machine_id,machine_type,name from machine;';
-
+  var cmd=`select link_id,link_type,link_status,from_machine,to_machine from link where mark_delete=0;\
+          select machine_id,machine_type,name from machine where mark_delete=0;`;
+  // console.log(cmd);
   // 执行数据库命令
   global.dbQuery(cmd,errCallback,resCallback);
 
