@@ -168,7 +168,7 @@ const setWarning = (req, res) => {
 };
 
 // 返回码
-const
+const logInfo = {
   log_200:{
     code:200,
     message:'成功',
@@ -265,6 +265,7 @@ const
     message:'修改失败',
     data:'权限不足'
   }
+}
 ```
 #### webSocket
 ```javascript
