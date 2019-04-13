@@ -12,3 +12,5 @@ xidian Network Management System Server<br>
 "express-session": "^1.15.6"<br>
 "mysql": "^2.16.0"<br>
 "ws": "^6.2.1"<br>
+
+why don't you add some instructions?
