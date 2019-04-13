@@ -23,7 +23,7 @@ module.exports=function(ws){
     }
     // errCallback
     function errCallback(){
-      var wsRes={ code:303, message:'token', data:'服务器错误' };
+      var wsRes={ code:303, message:'token', data:'数据库错误' };
       ws.send(JSON.stringify(wsRes));
     }
     // resCallback
