@@ -62,8 +62,12 @@ module.exports=function(req,res){
     resData=logInfo.log_230;
     resData.data=dbRes;
     res.json(resData);
-    id=id||dbRes.insertId;
-    global.EventEmitter.emit('wsInform',{name:'machine',id});
+    if(id){
+      global.EventEmitter.emit('wsInform',{name:'machine',id});
+    }else{
+      global.EventEmitter.emit('wsInform',{name:'topology'});
+    }
+    
     return;
   }
 }

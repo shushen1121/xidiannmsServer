@@ -1,5 +1,6 @@
 const logInfo=require('../logInfo');
-const strUtil=require('../../utils/strUtil');
+const strUtil=require('../../utils/strUtil'),
+      dbUtil=require('../../utils/dbUtil');
 module.exports=function(req,res){
   var resData;
   // 未登录
@@ -39,7 +40,11 @@ module.exports=function(req,res){
     var cmd = `update link set ${prop} where link_id='${reqBody.id}'`;
     // console.log(cmd)
     
-    global.dbQuery(cmd,errCallback,resCallback,reqBody.id);
+    if(dbUtil.whetherTopologyChange(reqBody.data)){
+      global.dbQuery(cmd,errCallback,resCallback);
+    }else{
+      global.dbQuery(cmd,errCallback,resCallback,reqBody.id);
+    }    
   }
 
   // 新建
@@ -62,8 +67,11 @@ module.exports=function(req,res){
     resData=logInfo.log_230;
     resData.data=dbRes;
     res.json(resData);
-    id=id||dbRes.insertId;
-    global.EventEmitter.emit('wsInform',{name:'link',id});
+    if(id){
+      global.EventEmitter.emit('wsInform',{name:'link',id});
+    }else{
+      global.EventEmitter.emit('wsInform',{name:'topology'});
+    }
     return;
   }
 }
