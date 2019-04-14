@@ -293,8 +293,8 @@ wsSendData = {
 wsSendData = {
   message: 'inform',
   data: {
-    name: 'link' || 'machine',
-    id: link_id || machine_id
+    name: 'link' || 'machine' || 'topology',
+    id: link_id || machine_id || undefined
   }
 }
 // 回复授权请求
