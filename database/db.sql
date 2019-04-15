@@ -38,7 +38,7 @@ CREATE TABLE `warning` (
   `warning_aim` VARCHAR(255) NOT NULL default 'machine' COMMENT '告警目标类型',
   `warning_aim_id` INT(11) NOT NULL default 0 COMMENT '告警目标ID',
   `warning_time` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '告警时间',
-  `warning_end` tinyint(1) NOT NULL default 0 COMMENT '告警是否结束',
+  `warning_end` tinyint(1) NOT NULL default 0 COMMENT '告警是否结束,1为结束',
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
 
@@ -162,7 +162,7 @@ CREATE TABLE `machine` (
   `start_time` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '开始运行时间',
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
-  `mark_delete` tinyint(1) NOT NULL default 0 COMMENT '是否删除',
+  `mark_delete` tinyint(1) NOT NULL default 0 COMMENT '是否删除,1为删除',
   PRIMARY KEY (`machine_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='设备详情表';
 
@@ -240,7 +240,7 @@ CREATE TABLE `link` (
   `out_brand_width_used_ratio` DOUBLE NOT NULL DEFAULT 0 COMMENT '出带宽利用率',
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
-  `mark_delete` tinyint(1) NOT NULL default 0 COMMENT '是否删除',
+  `mark_delete` tinyint(1) NOT NULL default 0 COMMENT '是否删除,1为删除',
   PRIMARY KEY (`link_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='链路表';
 
