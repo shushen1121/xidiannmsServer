@@ -1,9 +1,10 @@
 const logInfo=require('../logInfo');
+const sql=require('../constant/sql/warning');
 module.exports=function(req,res){
   var resData;
   // 未登录
   if(!req.session.authority){
-    resData=logInfo.log_321;;
+    resData=logInfo.log_321;
     res.json(resData);
     return;
   }
@@ -13,18 +14,8 @@ module.exports=function(req,res){
     res.json(resData);
     return;
   }
-  
-  // var cmd='select * from warning where warning_end=0';
-  var cmd = `SELECT a.*, 
-  b.description AS create_way_description, 
-  c.description AS warning_level_description, 
-  d.description AS warning_type_description
-  FROM warning a,create_way b,warning_level c, warning_type d
-  WHERE a.create_way = b.create_way
-  AND a.warning_level = c.warning_level
-  AND a.warning_type = d.warning_type_id
-  AND a.warning_end = 0
-  `;
+
+  var cmd = sql.queryWarningAll;
 
   // 执行数据库命令
   global.dbQuery(cmd,errCallback,resCallback);

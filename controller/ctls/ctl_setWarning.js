@@ -1,10 +1,11 @@
 const logInfo=require('../logInfo');
 const strUtil=require('../../utils/strUtil');
+const sql=require('../constant/sql/warning');
 module.exports=function(req,res){
   var resData;
   // 未登录
   if(!req.session.authority){
-    resData=logInfo.log_331;;
+    resData=logInfo.log_331;
     res.json(resData);
     return;
   }
@@ -63,7 +64,7 @@ module.exports=function(req,res){
     resData=logInfo.log_230;
     resData.data=dbRes;
     res.json(resData);
-    var cmd=`select * from warning where warning_id=${id}`;
+    var cmd = sql.queryWarningByWarningId(id);
     global.dbQuery(cmd,
       function(){
         // TODO errCallback
