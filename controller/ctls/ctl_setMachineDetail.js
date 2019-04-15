@@ -38,7 +38,7 @@ module.exports=function(req,res){
     }
     var prop=strUtil.jsObjToSQLProp_update(reqBody.data);
     var cmd = `update machine set ${prop} where machine_id='${reqBody.id}'`;
-    // console.log(cmd)
+    console.log(cmd)
     
     if(dbUtil.whetherTopologyChange(reqBody.data)){
       global.dbQuery(cmd,errCallback,resCallback);
@@ -51,7 +51,7 @@ module.exports=function(req,res){
   function _new(reqBody){
     var prop=strUtil.jsObjToSQLProp_insert(reqBody.data);
     var cmd = `insert into machine ${prop}`;
-    // console.log(cmd)
+    console.log(cmd)
 
     global.dbQuery(cmd,errCallback,resCallback);
   }
