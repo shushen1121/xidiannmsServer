@@ -19,7 +19,9 @@ module.exports=function(req,res){
     res.json(resData);
     return;
   }else{
-    var cmd=`select * from machine where mark_delete=0`;
+    // var cmd=`select * from machine where mark_delete=0`;
+    var cmd=`select a.*, b.description as machine_type_description from machine a, machine_type b 
+    where mark_delete=0`;
     if(req.body.machine_id.length!=0){
       cmd+=` and machine_id in (${req.body.machine_id.join(',')})`;
     }
