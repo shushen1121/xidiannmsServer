@@ -7,7 +7,7 @@ module.exports={
     }
   },
   whetherTopologyChange:function(data){
-    if(data.from_machine||data.to_machine){
+    if(data.from_machine||data.to_machine||typeof data.mark_delete=='number'){
       return true;
     }else{
       return false;
