@@ -11,7 +11,7 @@ module.exports={
     var arrKey=[],arrVal=[];
     data.replace(/{?"([^":,{}]+)":"?([^":,{}]+)"?}?/g,function(data){
       arrKey.push(data.replace(/{?"([^":,{}]+)":"?([^":,{}]+)"?}?/,"$1"));
-      arrVal.push(data.replace(/{?"([^":,{}]+)":"?([^":,{}]+)"?}?/,"$2"));
+      arrVal.push(data.replace(/{?"([^":,{}]+)":([^:,{}]+)}?/,"$2").replace(/"/g,`'`));
     })
     data=`(${arrKey.join(',')}) values (${arrVal.join(',')})`;
     return data;
