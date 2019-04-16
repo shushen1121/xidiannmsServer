@@ -38,16 +38,15 @@ CREATE TABLE `warning` (
   `warning_aim` VARCHAR(255) NOT NULL default 'machine' COMMENT '告警目标类型',
   `warning_aim_id` INT(11) NOT NULL default 0 COMMENT '告警目标ID',
   `warning_time` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '告警时间',
-  `warning_end` tinyint(1) NOT NULL default 0 COMMENT '告警是否结束,1为结束',
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
-
+  UNIQUE KEY `warning_aim & aim_id` (`warning_aim`,`warning_aim_id`),
   PRIMARY KEY (`warning_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='告警信息表';
 
-INSERT INTO `warning` VALUES (1, 1, 1, 1, 'link', 3, NOW(), 0, NOW(), NOW());
-INSERT INTO `warning` VALUES (2, 2, 2, 1, 'link', 5, NOW(), 1, NOW(), NOW());
-INSERT INTO `warning` VALUES (3, 3, 1, 1, 'machine', 7, NOW(), 0, NOW(), NOW());
+INSERT INTO `warning` VALUES (1, 1, 1, 1, 'link', 3, NOW(), NOW(), NOW());
+INSERT INTO `warning` VALUES (2, 2, 2, 1, 'link', 5, NOW(), NOW(), NOW());
+INSERT INTO `warning` VALUES (3, 3, 1, 1, 'machine', 7, NOW(), NOW(), NOW());
 
 /*
 告警级别表
@@ -126,20 +125,20 @@ CREATE TABLE `link_type` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='链路类型表';
 
 /*
-链路状态表
+状态表
 */
-DROP TABLE IF EXISTS `link_status`;
-CREATE TABLE `link_status` (
-  `link_status_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
-  `link_status` INT(11) NOT NULL DEFAULT 0 COMMENT '链路状态' UNIQUE ,
+DROP TABLE IF EXISTS `status`;
+CREATE TABLE `status` (
+  `status_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
+  `status` INT(11) NOT NULL DEFAULT 0 COMMENT '链路状态' UNIQUE ,
   `description` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '链路状态描述',
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
-  PRIMARY KEY (`link_status_id`)
+  PRIMARY KEY (`status_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='链路状态表';
 
-INSERT INTO link_status VALUES (1, 1, '告警', NOW(), NOW());
-INSERT INTO link_status VALUES (2, 2, '正常', NOW(), NOW());
+INSERT INTO status VALUES (1, 1, '告警', NOW(), NOW());
+INSERT INTO status VALUES (2, 2, '正常', NOW(), NOW());
 
 /*
 设备信息表
@@ -149,6 +148,7 @@ CREATE TABLE `machine` (
   `machine_id` INT(11) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `machine_type` INT(11) NOT NULL DEFAULT 0 COMMENT '设备类型',
   `name` VARCHAR(255) NOT NULL DEFAULT '' COMMENT '设备名称',
+  `machine_status` INT(11) NOT NULL DEFAULT 0 COMMENT '设备状态',
   `ip_address` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'IP地址',
   `SNMP_address` VARCHAR(255) NOT NULL DEFAULT '' COMMENT 'SNMP地址',
   `memory_used_ratio` DOUBLE NOT NULL DEFAULT 0 COMMENT '内存使用率',
@@ -175,49 +175,49 @@ SET @Description_two = 'Cisco IOS Software, c7600rsp72043_rp Software (c7600rsp7
 SET @Description_three = 'Huawei Versatile Routing Platform Software Version: VRP (R) software, Version 5.30 USG5120BSR V100R005C00SPC300 Copyright (c) 2008-2011 Huawei Technologies Co., Ltd.';
 SET @Description_four = 'Ruijie Router (RSR20-24) by Ruijie Networks Co., Ltd.';
 
-INSERT INTO machine VALUES (1, 1, 'DLQ8', '10.192.188.66', '10.192.188.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (2, 1, '7609', '10.192.255.4', '10.192.255.4', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (3, 1, 'X9RN', '	10.192.255.3', '	10.192.255.3', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (4, 1, 'RM3A', '10.192.187.66', '10.192.187.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (5, 1, '520B', '37.40.224.1', '37.40.224.1', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (6, 1, 'BIQKJ', '37.16.224.1', '37.16.224.1', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (7, 1, '8S7R', '37.48.248.10', '37.48.248.10', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (8, 1, 'HJRR', '37.48.248.34', '37.48.248.34', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (9, 1, 'BB20', '37.0.248.22', '37.0.248.22', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (10, 1, 'C7FM', '37.0.248.38', '37.0.248.38', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (11, 1, '83JV', '37.0.248.10', '37.0.248.10', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (12, 1, '03MF', '37.0.248.42', '37.0.248.42', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (13, 1, '832HC', '37.104.248.14', '37.104.248.14', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (14, 1, 'VIW82', '37.0.248.50', '37.0.248.50', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (15, 1, 'V8W9', '37.0.248.62', '37.0.248.62', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (16, 1, '09372', '37.0.248.66', '37.0.248.66', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (17, 1, '9ENV', '37.0.248.58', '37.0.248.58', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (18, 1, 'VMWOI', '37.112.224.1', '37.112.224.1', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (19, 1, 'UV9Q', '37.32.248.2', '37.32.248.2', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (20, 1, 'AOIC', '37.32.248.10', '37.32.248.10', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (21, 1, '14EA', '37.32.248.6', '37.32.248.6', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (22, 1, '98FM', '37.32.224.1', '37.32.224.1', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (23, 1, 'O2NJ', '37.136.128.10', '37.136.128.10', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (24, 1, 'SR24', '37.0.248.46', '37.0.248.46', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (25, 1, 'WOV1', '37.0.248.34', '37.0.248.34', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (26, 1, '220B', '37.64.224.1', '37.64.224.1', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (27, 1, '47AK', '37.32.248.10', '37.32.248.10', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (28, 1, '2339M', '37.40.224.5', '37.40.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (29, 1, 'CW7R', '37.32.224.5', '37.32.224.5', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (30, 1, 'RGE9 M', '37.64.224.5', '37.64.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (31, 1, '23HJ', '37.0.244.6', '37.0.244.6', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (32, 1, 'CD09', '37.0.244.42', '37.0.244.42', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (33, 1, 'LK1J', '37.0.244.34', '37.0.244.34', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (34, 1, 'ZI328', '37.112.224.5', '37.112.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (35, 1, 'V8327', '37.0.244.62', '37.0.244.62', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (36, 1, 'V9E8', '37.0.244.66', '37.0.244.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (37, 1, 'C092', '37.0.244.50', '37.0.244.50', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (38, 1, 'LGM1', '37.0.244.10', '37.0.244.10', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (39, 1, 'FJ84', '37.48.224.5', '37.48.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (40, 1, 'BSRA', '37.0.244.38', '37.0.244.38', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (41, 1, 'V9382', '37.0.244.58', '37.0.244.58', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (42, 1, 'SCOQ', '37.0.244.46', '37.0.244.46', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
-INSERT INTO machine VALUES (43, 1, '09PQ', '172.16.1.38', '37.0.244.21', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (1, 1, 'DLQ8', 2, '10.192.188.66', '10.192.188.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (2, 1, '7609', 2, '10.192.255.4', '10.192.255.4', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (3, 1, 'X9RN', 2, '	10.192.255.3', '	10.192.255.3', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (4, 1, 'RM3A', 2, '10.192.187.66', '10.192.187.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (5, 1, '520B', 2, '37.40.224.1', '37.40.224.1', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (6, 1, 'BIQKJ', 2, '37.16.224.1', '37.16.224.1', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (7, 1, '8S7R', 1, '37.48.248.10', '37.48.248.10', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (8, 1, 'HJRR', 2, '37.48.248.34', '37.48.248.34', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (9, 1, 'BB20', 2, '37.0.248.22', '37.0.248.22', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (10, 1, 'C7FM', 2, '37.0.248.38', '37.0.248.38', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (11, 1, '83JV', 2, '37.0.248.10', '37.0.248.10', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (12, 1, '03MF', 2, '37.0.248.42', '37.0.248.42', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (13, 1, '832HC', 2, '37.104.248.14', '37.104.248.14', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (14, 1, 'VIW82', 2, '37.0.248.50', '37.0.248.50', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (15, 1, 'V8W9', 2, '37.0.248.62', '37.0.248.62', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (16, 1, '09372', 2, '37.0.248.66', '37.0.248.66', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (17, 1, '9ENV', 2, '37.0.248.58', '37.0.248.58', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (18, 1, 'VMWOI', 2, '37.112.224.1', '37.112.224.1', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (19, 1, 'UV9Q', 2, '37.32.248.2', '37.32.248.2', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (20, 1, 'AOIC', 2, '37.32.248.10', '37.32.248.10', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (21, 1, '14EA', 2, '37.32.248.6', '37.32.248.6', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (22, 1, '98FM', 2, '37.32.224.1', '37.32.224.1', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (23, 1, 'O2NJ', 2, '37.136.128.10', '37.136.128.10', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (24, 1, 'SR24', 2, '37.0.248.46', '37.0.248.46', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (25, 1, 'WOV1', 2, '37.0.248.34', '37.0.248.34', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (26, 1, '220B', 2, '37.64.224.1', '37.64.224.1', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (27, 1, '47AK', 2, '37.32.248.10', '37.32.248.10', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (28, 1, '2339M', 2, '37.40.224.5', '37.40.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (29, 1, 'CW7R', 2, '37.32.224.5', '37.32.224.5', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (30, 1, 'RGE9 M', 2, '37.64.224.5', '37.64.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (31, 1, '23HJ', 2, '37.0.244.6', '37.0.244.6', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (32, 1, 'CD09', 2, '37.0.244.42', '37.0.244.42', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (33, 1, 'LK1J', 2, '37.0.244.34', '37.0.244.34', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (34, 1, 'ZI328', 2, '37.112.224.5', '37.112.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (35, 1, 'V8327', 2, '37.0.244.62', '37.0.244.62', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (36, 1, 'V9E8', 2, '37.0.244.66', '37.0.244.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (37, 1, 'C092', 2, '37.0.244.50', '37.0.244.50', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (38, 1, 'LGM1', 2, '37.0.244.10', '37.0.244.10', 22.10, 1000, 24.00, 1000, @Product_two, 10, 5, @Description_two, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (39, 1, 'FJ84', 2, '37.48.224.5', '37.48.224.5', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (40, 1, 'BSRA', 2, '37.0.244.38', '37.0.244.38', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (41, 1, 'V9382', 2, '37.0.244.58', '37.0.244.58', 22.10, 1000, 24.00, 1000, @Product_four, 10, 5, @Description_four, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (42, 1, 'SCOQ', 2, '37.0.244.46', '37.0.244.46', 22.10, 1000, 24.00, 1000, @Product_three, 10, 5, @Description_three, NOW(), NOW(), NOW(), 0);
+INSERT INTO machine VALUES (43, 1, '09PQ', 2, '172.16.1.38', '37.0.244.21', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
 
 /*
 * 链路表
@@ -249,9 +249,9 @@ SET @To_port = 'atm1/0';
 
 INSERT INTO `link` VALUES (1, 0, 2, 4, @Source_port, 27, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
 INSERT INTO `link` VALUES (2, 0, 2, 27, @Source_port, 5, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
-INSERT INTO `link` VALUES (3, 0, 2, 22, @Source_port, 20, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
+INSERT INTO `link` VALUES (3, 0, 1, 22, @Source_port, 20, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
 INSERT INTO `link` VALUES (4, 0, 2, 27, @Source_port, 23, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
-INSERT INTO `link` VALUES (5, 0, 2, 34, @Source_port, 43, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
+INSERT INTO `link` VALUES (5, 0, 1, 34, @Source_port, 43, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
 INSERT INTO `link` VALUES (6, 0, 2, 43, @Source_port, 39, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
 INSERT INTO `link` VALUES (7, 0, 2, 43, @Source_port, 28, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
 INSERT INTO `link` VALUES (8, 0, 2, 43, @Source_port, 37, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);

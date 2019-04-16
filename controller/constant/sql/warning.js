@@ -1,4 +1,4 @@
-const basic = `SELECT a.*, 
+const queryBasic = `SELECT a.*, 
   b.description AS create_way_description, 
   c.description AS warning_level_description, 
   d.description AS warning_type_description
@@ -7,9 +7,9 @@ const basic = `SELECT a.*,
   AND a.warning_level = c.warning_level
   AND a.warning_type = d.warning_type_id`;
 
-const queryWarningAll =  `${basic} AND a.warning_end = 0`;
+const queryWarningAll =  `${queryBasic} AND a.warning_end = 0`;
 
-const queryWarningByWarningId = (id) => `${basic} AND warning_id = ${id}`;
+const queryWarningByWarningId = (id) => `${queryBasic} AND warning_id = ${id}`;
 
 module.exports = {
   queryWarningAll,

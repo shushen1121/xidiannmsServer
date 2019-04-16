@@ -1,11 +1,12 @@
 const logInfo=require('../logInfo');
 const strUtil=require('../../utils/strUtil'),
       dbUtil=require('../../utils/dbUtil');
+const sql=require('../constant/sql/link');
 module.exports=function(req,res){
   var resData;
   // 未登录
   if(!req.session.authority){
-    resData=logInfo.log_331;;
+    resData=logInfo.log_331;
     res.json(resData);
     return;
   }
@@ -68,7 +69,15 @@ module.exports=function(req,res){
     resData.data=dbRes;
     res.json(resData);
     if(id){
-      global.EventEmitter.emit('wsInform',{name:'link',id});
+      var cmd = sql.queryLinkByLinkId(id);
+      global.dbQuery(cmd,
+        function(){
+          // TODO errCallback
+        },
+        function(wsRes){
+          global.EventEmitter.emit('wsInform',{name:'link',wsRes});
+        }
+      );
     }else{
       global.EventEmitter.emit('wsInform',{name:'topology'});
     }
