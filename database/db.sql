@@ -163,6 +163,7 @@ CREATE TABLE `machine` (
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
   `mark_delete` tinyint(1) NOT NULL default 0 COMMENT '是否删除,1为删除',
+  UNIQUE KEY `machine_type & name` (`machine_type`,`name`),
   PRIMARY KEY (`machine_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='设备详情表';
 
@@ -241,6 +242,7 @@ CREATE TABLE `link` (
   `dataChange_createTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '创建时间',
   `dataChange_changeTime` datetime(3) NOT NULL default CURRENT_TIMESTAMP(3) COMMENT '最后修改时间',
   `mark_delete` tinyint(1) NOT NULL default 0 COMMENT '是否删除,1为删除',
+  UNIQUE KEY `from_machine & to_machine` (`from_machine`,`to_machine`),
   PRIMARY KEY (`link_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='链路表';
 
