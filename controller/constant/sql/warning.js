@@ -7,11 +7,15 @@ const queryBasic = `SELECT a.*,
   AND a.warning_level = c.warning_level
   AND a.warning_type = d.warning_type_id`;
 
-const queryWarningAll =  `${queryBasic} AND a.warning_end = 0`;
+const queryWarningAll =  `${queryBasic}`;
 
-const queryWarningByWarningId = (id) => `${queryBasic} AND warning_id = ${id}`;
+// 错误命令
+// const queryWarningByWarningId = (id) => `${queryBasic} AND warning_id = ${id}`;
+
+const queryWarningById = (id) => `SELECT * FROM warning WHERE warning_id = ${id}`;
+
 
 module.exports = {
   queryWarningAll,
-  queryWarningByWarningId
+  queryWarningById
 };

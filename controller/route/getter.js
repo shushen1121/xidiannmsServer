@@ -1,20 +1,15 @@
 module.exports=function(app){
-  // 获取拓扑结构
-  const ctl_getTopology = require('../ctls/ctl_getTopology');
-  app.post('/getTopology',function(req, res){
-    ctl_getTopology(req, res);
-  })
 
   // 获取设备详情
-  const ctl_getMachineDetail = require('../ctls/ctl_getMachineDetail');
-  app.post('/getMachineDetail',function(req, res){
-    ctl_getMachineDetail(req, res);
+  const ctl_getMachine = require('../ctls/ctl_getMachine');
+  app.post('/getMachine',function(req, res){
+    ctl_getMachine(req, res);
   })
 
   // 获取链路详情
-  const ctl_getLinkDetail = require('../ctls/ctl_getLinkDetail');
-  app.post('/getLinkDetail',function(req, res){
-    ctl_getLinkDetail(req, res);
+  const ctl_getLink = require('../ctls/ctl_getLink');
+  app.post('/getLink',function(req, res){
+    ctl_getLink(req, res);
   })
 
   // 获取告警信息

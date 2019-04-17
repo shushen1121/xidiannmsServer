@@ -40,7 +40,7 @@ module.exports={
     }
   },
   log_215:{
-    code:211,
+    code:215,
     message:'退出成功',
     data:{
       name:undefined,
@@ -75,7 +75,7 @@ module.exports={
     data:'数据库错误'
   },
   log_302:{
-    code:301,
+    code:302,
     message:'失败',
     data:'缺少必要参数,或参数无效'
   },
@@ -85,37 +85,37 @@ module.exports={
     data:'重复登录'
   },
   log_312:{
-    code:301,
+    code:312,
     message:'登录失败',
     data:'账号不存在'
   },
   log_313:{
-    code:301,
+    code:313,
     message:'登录失败',
     data:'账号或密码错误'
   },
   log_316:{
-    code:301,
+    code:316,
     message:'退出失败',
     data:'未登录'
   },
   log_321:{
-    code:311,
+    code:321,
     message:'查询失败',
     data:'未登录'
   },
   log_322:{
-    code:301,
+    code:322,
     message:'查询失败',
     data:'权限不足'
   },
   log_331:{
-    code:311,
+    code:331,
     message:'修改失败',
     data:'未登录'
   },
   log_332:{
-    code:301,
+    code:332,
     message:'修改失败',
     data:'权限不足'
   }
