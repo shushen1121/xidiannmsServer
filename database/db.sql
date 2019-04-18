@@ -167,13 +167,13 @@ CREATE TABLE `machine` (
   PRIMARY KEY (`machine_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='设备详情表';
 
-SET @Product_one = 'Maipu Electric Industrial Co., Ltd';
-SET @Product_two = 'ciscoSystems';
-SET @Product_three = 'HUAWEI Technology Co.,Ltd';
-SET @Product_four = 'Start Network Technology Co., Ltd.';
-SET @Description_one = 'MyPower (R) Operating System Software MP3840 version 6.3.6(integrity), compiled on Oct 16 2012, 04:52:26 Copyright (C) 1999 Maipu Communication Technology Co., Ltd. All Rights Reserved.';
-SET @Description_two = 'Cisco IOS Software, c7600rsp72043_rp Software (c7600rsp72043_rp-ADVIPSERVICESK9-M), Version 15.2(4)S6, RELEASE SOFTWARE (fc1) Technical Support: http://www.cisco.com/techsupport Copyright (c) 1986-2014 by Cisco Systems, Inc. Compiled Fri 08-Aug-14 05:1';
-SET @Description_three = 'Huawei Versatile Routing Platform Software Version: VRP (R) software, Version 5.30 USG5120BSR V100R005C00SPC300 Copyright (c) 2008-2011 Huawei Technologies Co., Ltd.';
+SET @Product_one = 'Maipu Electric Industrial Co, Ltd';
+SET @Product_two = 'CiscoSystems';
+SET @Product_three = 'HUAWEI Technology Co,Ltd';
+SET @Product_four = 'Start Network Technology Co, Ltd.';
+SET @Description_one = 'MyPower (R) Operating System Software MP3840 version 6.3.6(integrity), compiled on Oct 16 2012, 04:52:26 Copyright (C) Version 5.30.';
+SET @Description_two = 'Cisco IOS Software, c7600rsp72043_rp Software (c7600rsp72043_rp-ADVIPSERVICESK9-M), Version 15.2(4)S6.';
+SET @Description_three = 'Huawei Versatile Routing Platform Software Version: VRP (R) software, Version 9.79.';
 SET @Description_four = 'Ruijie Router (RSR20-24) by Ruijie Networks Co., Ltd.';
 
 INSERT INTO machine VALUES (1, 1, 'DLQ8', 2, '10.192.188.66', '10.192.188.66', 22.10, 1000, 24.00, 1000, @Product_one, 10, 5, @Description_one, NOW(), NOW(), NOW(), 0);
@@ -246,7 +246,7 @@ CREATE TABLE `link` (
   PRIMARY KEY (`link_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='链路表';
 
-SET @Source_port = 'GigabitEthernet2/1/1.20';
+SET @Source_port = 'GigabitEthernet2/1';
 SET @To_port = 'atm1/0';
 
 INSERT INTO `link` VALUES (1, 0, 2, 4, @Source_port, 27, @To_port, 24, 25.2, 12.45, 32.34, 0.33, 0.4349, 0.2347, NOW(), NOW(), 0);
