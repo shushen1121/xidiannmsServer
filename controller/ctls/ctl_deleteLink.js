@@ -1,8 +1,9 @@
 const linkDao=require('../../dao/link'),
+      warningDao=require('../../dao/warning')
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={last:'begin',val:req.body.id};
+  var data={api:'deleteLink',val:req.body.id};
   // 查找链路
   linkDao.get([ data, undefined, res ])
   // 删除告警(byWarning)
@@ -10,12 +11,16 @@ module.exports=function(req,res){
     linkDao.deleteByLink,
     otherDao.httpRes
   )
-  // HTTP响应 & 告警推送
+  // HTTP响应 & 删除告警(ByLinkId)
   .then(
     data => Promise.race([
       otherDao.httpRes(data),
-      otherDao.wsSend_inform(data)
+      warningDao.deleteByLinkId(data)
     ]),
     otherDao.httpRes
+  )
+  // 告警推送
+  .then(
+    otherDao.wsSend_inform
   )
 }

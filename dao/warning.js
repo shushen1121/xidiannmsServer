@@ -1,11 +1,11 @@
 const strUtil=require('../utils/strUtil');
-module.exports=dao={
-  resolve:function(last,data,resolve,httpRes){
-    var res={last,val:data};
+const dao={
+  resolve:function(api,data,resolve,httpRes){
+    var res={api,val:data};
     resolve([res,200,httpRes]);
   },
-  reject:function(last,data,reject,httpRes){
-    var res={last,val:data};
+  reject:function(api,data,reject,httpRes){
+    var res={api,val:data};
     reject([res,300,httpRes]);
   },
   /**
@@ -14,19 +14,19 @@ module.exports=dao={
    */
   get:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
-      var last='getWarning';
-      console.log(Date.now()+'---'+last);
+      var log='getWarning';
+      console.log(Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
-        dao.reject(last,'参数无效',reject,httpRes);
+        dao.reject(data.api,'参数无效',reject,httpRes);
       }
       // 获取所有告警
       else if(data.val.length==0){
         var cmd=`select * from warning`;
         global.dbQuery(cmd)
         .then(
-          data0 => dao.resolve(last,data0,resolve,httpRes),
-          data0 => dao.reject(last,data0,reject,httpRes)
+          data0 => dao.resolve(data.api,data0,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
         )
       }
       // 获取指定告警
@@ -34,8 +34,8 @@ module.exports=dao={
         var cmd=`select * from warning where warning_id in (${data.val.join(',')})`;
         global.dbQuery(cmd)
         .then(
-          data0 => dao.resolve(last,data0,resolve,httpRes),
-          data0 => dao.reject(last,data0,reject,httpRes)
+          data0 => dao.resolve(data.api,data0,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
         )
       }
     })
@@ -47,11 +47,11 @@ module.exports=dao={
    */
   add:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
-      var last='addWarning';
-      console.log(Date.now()+'---'+last);
+      var log='addWarning';
+      console.log(Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Object)){
-        dao.reject(last,'参数无效',reject,httpRes);
+        dao.reject(data.api,'参数无效',reject,httpRes);
       }
       // 新增告警
       else{
@@ -59,8 +59,8 @@ module.exports=dao={
         var cmd = `insert into warning ${prop}`;
         global.dbQuery(cmd)
         .then(
-          data0 => dao.resolve(last,[data0.insertId],resolve,httpRes),
-          data0 => dao.reject(last,data0,reject,httpRes)
+          data0 => dao.resolve(data.api,[data0.insertId],resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
         )
       }
     })
@@ -72,19 +72,19 @@ module.exports=dao={
    */
   deleteById:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
-      var last='deleteWarningById';
-      console.log(Date.now()+'---'+last);
+      var log='deleteWarningById';
+      console.log(Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
-        dao.reject(last,'参数无效',reject,httpRes);
+        dao.reject(data.api,'参数无效',reject,httpRes);
       }
       // 删除所有告警
       else if(data.val.length==0){
         var cmd=`delete from warning`;
         global.dbQuery(cmd)
         .then(
-          data0 => dao.resolve(last,data.val,resolve,httpRes),
-          data0 => dao.reject(last,data0,reject,httpRes)
+          data0 => dao.resolve(data.api,data.val,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
         )
       }
       // 删除指定告警
@@ -92,8 +92,8 @@ module.exports=dao={
         var cmd=`delete from warning where warning_id in (${data.val.join(',')})`;
         global.dbQuery(cmd)
         .then(
-          data0 => dao.resolve(last,data.val,resolve,httpRes),
-          data0 => dao.reject(last,data0,reject,httpRes)
+          data0 => dao.resolve(data.api,data.val,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
         )
       }
     })
@@ -105,11 +105,11 @@ module.exports=dao={
    */
   deleteByWarning:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
-      var last='deleteWarningByWarning';
-      console.log(Date.now()+'---'+last);
+      var log='deleteWarningByWarning';
+      console.log(Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
-        dao.reject(last,'参数无效',reject,httpRes);
+        dao.reject(data.api,'参数无效',reject,httpRes);
       }
       // 删除指定告警
       else{
@@ -120,10 +120,65 @@ module.exports=dao={
         var cmd=`delete from warning where warning_id in (${warning_id.join(',')})`;
         global.dbQuery(cmd)
         .then(
-          data0 => dao.resolve(last,warning_id,resolve,httpRes),
-          data0 => dao.reject(last,data0,reject,httpRes)
+          data0 => dao.resolve(data.api,warning_id,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
+        )
+      }
+    })
+  },
+
+  /**
+   * 删除告警(ByLinkId)
+   * @param {*} param0 
+   */
+  deleteByLinkId:function([data,code,httpRes]){
+    return new Promise(function(resolve,reject){
+      var log='deleteWarningByLinkId';
+      console.log(Date()+' - '+log);
+      // 参数是否有效
+      if(!(data.val instanceof Array)){
+        dao.reject(data.api,'参数无效',reject,httpRes);
+      }
+      else if(data.val.length==0){
+        dao.resolve(data.api,data0,resolve,httpRes)
+      }
+      // 删除指定告警
+      else{
+        var cmd=`delete from warning where warning_aim_id in (${data.val.join(',')}) and warning_aim='link'`;
+        global.dbQuery(cmd)
+        .then(
+          data0 => dao.resolve(data.api,data0,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
+        )
+      }
+    })
+  },
+
+  /**
+   * 删除告警(ByMachineId)
+   * @param {*} param0 
+   */
+  deleteByMachineId:function([data,code,httpRes]){
+    return new Promise(function(resolve,reject){
+      var log='deleteWarningByMachineId';
+      console.log(Date()+' - '+log);
+      // 参数是否有效
+      if(!(data.val instanceof Array)){
+        dao.reject(data.api,'参数无效',reject,httpRes);
+      }
+      else if(data.val.length==0){
+        dao.resolve(data.api,data0,resolve,httpRes)
+      }
+      // 删除指定告警
+      else{
+        var cmd=`delete from warning where warning_aim_id in (${data.val.join(',')}) and warning_aim='machine'`;
+        global.dbQuery(cmd)
+        .then(
+          data0 => dao.resolve(data.api,data0,resolve,httpRes),
+          data0 => dao.reject(data.api,data0,reject,httpRes)
         )
       }
     })
   }
 }
+module.exports=dao;

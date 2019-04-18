@@ -1,7 +1,7 @@
 module.exports=function(){
   // 告警
   global.EventEmitter.on('wsWarning',function(data){
-    console.log(data)
+    // console.log(data)
     for(var i=0;i<global.ws.length;i++){
       var ws=global.ws[i];
       if(ws.token){
@@ -15,7 +15,7 @@ module.exports=function(){
   })
   // 通知更新
   global.EventEmitter.on('wsInform',function(data){
-    console.log(data)
+    // console.log(data)
     for(var i=0;i<global.ws.length;i++){
       var ws=global.ws[i];
       if(ws.token){

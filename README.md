@@ -15,44 +15,45 @@ xidian Network Management System Server<br>
 # 结构
 #### 流程
 ```
-getWarning:           查询告警 》 HTTP响应
+@ getWarning:           查询告警 》 HTTP响应
 
 
-addWarning:           增加告警 》 查询告警 》 修改链路/设备告警标识
-                                         》 告警推送
+@ addWarning:           增加告警 》 查询告警 》 修改链路/设备告警标识 》 告警推送
                               》 HTTP响应
 
 
-deleteWarning:        查询告警 》 修改链路/设备告警标识 》 删除告警(byWarning) 》 HTTP响应
-                                                                           》 告警推送
+@ deleteWarning:        查询告警 》 修改链路/设备告警标识 》 删除告警(byWarning) 》 HTTP响应
+                                                                             》 告警推送
 
 
-getLink:              查询链路 》 HTTP响应
+@ getLink:              查询链路 》 HTTP响应
 
 
-addLink:              增加链路 》 HTTP响应
+@ addLink:              增加链路 》 HTTP响应
                               》 拓扑修改推送
 
 
-deleteLink:           查询链路 》 删除链路(byLink) 》 HTTP响应 
-                                                 》 拓扑修改推送
+@ deleteLink:           查询链路 》 删除链路(byLink) 》 删除告警(ByLinkId) 》 拓扑修改推送
+                                                   》 HTTP响应
 
-changeLinkDetail:     修改链路详情 》 查询链路 》 详情修改推送
+@ changeLinkDetail:     修改链路详情 》 查询链路 》 详情修改推送
                                   》 HTTP响应
 
 
-getMachine:           查询设备 》 HTTP响应
+@ getMachine:           查询设备 》 HTTP响应
 
 
-addMachine:           增加设备 》 HTTP响应
+@ addMachine:           增加设备 》 HTTP响应
                               》 拓扑修改推送
 
-// TODO
-deleteMachine:        查询设备 》 删除设备(ByMachine) 》 删除链路(ByMachine) 》 拓扑修改推送
-                                                    》 HTTP响应 
+
+@ deleteMachine:        查询设备 》 删除设备(ByMachine) 》 { 查询链路(ByMachineId) } 》 删除链路(ByLink) 》 删除告警(ByLinkId) 》 拓扑修改推送
+                                                                                
+                                                    》 { 删除告警(ByMachineId) }
+                                                    》 HTTP响应
 
 
-changeMachineDetail:  修改设备详情  》 查询设备 》 详情修改推送
+@ changeMachineDetail:  修改设备详情  》 查询设备 》 详情修改推送
                                    》 HTTP响应
 ```
 #### 方法
@@ -72,8 +73,11 @@ changeMachineDetail:  修改设备详情  》 查询设备 》 详情修改推�
 删除告警(ByWarning)
 ([ {last,val:[warning]}, code, httpRes ]) => ([ {last:'deleteWarningByWarning',val:[id]}, 200, httpRes ])
 
-删除告警(ByLink_or_Machine)
-([ {last,val:[link_or_machine]}, code, httpRes ]) => ([ {last:'deleteWarningByLink_or_Machine',val:[id]}, 200, httpRes ])
+删除告警(ByLinkId)
+([ {last,val:[id]}, code, httpRes ]) => ([ {last:'deleteWarningByLink',val:[id]}, 200, httpRes ])
+
+删除告警(ByMachineId)
+([ {last,val:[id]}, code, httpRes ]) => ([ {last:'deleteWarningByMachine',val:[id]}, 200, httpRes ])
 
 <!-- machine -->
 
@@ -92,10 +96,16 @@ changeMachineDetail:  修改设备详情  》 查询设备 》 详情修改推�
 修改设备详情
 ([ {last,val:{machine}}, code, httpRes ]) => ([ {last:'changeMachineDetail',val:[id]}, 200, httpRes ])
 
+修改设备告警标识
+([ {last,val:[warning]}, code, httpRes ]) => ([ {last,val:[warning]}, code, httpRes ])
+
 <!-- link -->
 
 查询链路
 ([ {last,val:[id]}, code, httpRes ]) => ([ {last:'getLink',val:[Link]}, 200, httpRes ])
+
+查询链路(ByMachineId)
+([ {last,val:[id]}, code, httpRes ]) => ([ {last:'getLinkByMachineId',val:[id]}, 200, httpRes ])
 
 增加链路
 ([ {last,val:{link}}, code, httpRes ]) => ([ {last:'addLink',val:[suc.insertId]}, 200, httpRes ])
@@ -112,6 +122,9 @@ changeMachineDetail:  修改设备详情  》 查询设备 》 详情修改推�
 修改链路详情
 ([ {last,val:{link}}, code, httpRes ]) => ([ {last:'changeLinkDetail',val:[id]}, 200, httpRes ])
 
+修改链路告警标识
+([ {last,val}, code, httpRes ]) => ([ {last,val}, code, httpRes ])
+
 <!-- other -->
 HTTP响应
 ([ {last,val}, code, httpRes ]) => ( )
@@ -125,8 +138,8 @@ HTTP响应
 详情修改推送
 ([ {last,val}, code, httpRes ]) => ( )
 
-修改链路/设备告警标识
-([ {last,val}, code, httpRes ]) => ([ {last,val}, code, httpRes ])
+登录
+([ {last,val}, code, httpRes ]) => ( )
 
 权限检查
 ([ {req}, code, httpRes ]) => ([ {last,val:req.body.···}, code, httpRes ])

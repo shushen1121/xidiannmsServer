@@ -29,10 +29,7 @@ app.use(function(req, res, next){
 //静态网页，地址:'/'
 app.use('/',express.static('public'));
 // API
-const sign=require('./route/sign')(app),
-      getter=require('./route/getter')(app),
-      setter=require('./route/setter')(app),
-      static=require('./route/static')(app);
+const route=require('./route')(app);
 
 app.listen(8000);
 console.log('http port:8000');
