@@ -15,7 +15,7 @@ const dao={
   get:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getWarning';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -48,7 +48,7 @@ const dao={
   add:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='addWarning';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Object)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -73,7 +73,7 @@ const dao={
   deleteById:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteWarningById';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -106,7 +106,7 @@ const dao={
   deleteByWarning:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteWarningByWarning';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -134,7 +134,7 @@ const dao={
   deleteByLinkId:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteWarningByLinkId';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -161,7 +161,7 @@ const dao={
   deleteByMachineId:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteWarningByMachineId';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);

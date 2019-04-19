@@ -15,7 +15,7 @@ const dao={
   get:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getLink';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -43,7 +43,7 @@ const dao={
   getByMachineId:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getLinkByMachineId';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -70,7 +70,7 @@ const dao={
   add:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='addLink';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Object)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -100,11 +100,11 @@ const dao={
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
       }
-      // 删除所有告警
+      // 删除所有链路
       else if(data.val.length==0){
         dao.resolve(data.api,data.val,resolve,httpRes)
       }
-      // 删除指定告警
+      // 删除指定链路
       else{
         var cmd=`delete from link where link_id in (${data.val.join(',')})`;
         global.dbQuery(cmd)
@@ -117,13 +117,13 @@ const dao={
   },
 
   /**
-   * 删除告警(ByWarning)
+   * 删除链路(ByWarning)
    * @param {*} param0 
    */
   deleteByWarning:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteWarningByWarning';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -151,7 +151,7 @@ const dao={
   deleteByMachine:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteLinkByMachine';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -176,7 +176,7 @@ const dao={
   deleteByLink:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteLinkByLink';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -204,7 +204,7 @@ const dao={
   changeDetail:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='changeLinkDetail';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Object)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -228,7 +228,7 @@ const dao={
   changeStatus:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='changeLinkStatus';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);

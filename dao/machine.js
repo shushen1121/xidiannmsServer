@@ -15,7 +15,7 @@ const dao={
   get:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getMachine';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -48,7 +48,7 @@ const dao={
   add:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='addMachine';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Object)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -84,7 +84,7 @@ const dao={
   deleteByMachine:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='deleteMachineByMachine';
-      console.log(Date()+' - '+log)
+      console.log('  '+Date()+' - '+log)
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -112,7 +112,7 @@ const dao={
   changeDetail:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='changeMachineDetail';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Object)){
         dao.reject(data.api,'参数无效',reject,httpRes);
@@ -136,7 +136,7 @@ const dao={
   changeStatus:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='changeMachineStatus';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);

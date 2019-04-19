@@ -6,13 +6,13 @@ module.exports={
   httpRes:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='httpRes';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       var resData={
         code,
         data,
         message:code==200?'success':'error'
       }
-      httpRes.json(resData);
+      httpRes.resJson(resData);
     })
   },
 
@@ -23,7 +23,7 @@ module.exports={
   wsSend_warning:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='wsSend_warning';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       global.EventEmitter.emit('wsWarning',data);
     })
   },
@@ -35,7 +35,7 @@ module.exports={
   wsSend_inform:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='wsSend_inform';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       global.EventEmitter.emit('wsInform',data);
     })
   },
@@ -47,7 +47,7 @@ module.exports={
   signIn:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='signIn';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       // 参数是否有效
       if(!(data.val.account&&data.val.password)){
         var res={api:data.api,val:'参数无效'};
@@ -73,7 +73,12 @@ module.exports={
             else{
               data.session.authority=data0[0].authority;
               data.session.account=data.val.account;
-              var res={api:data.api,val:data.session.id};
+              var res={
+                api:data.api,
+                val:{
+                  sessionId:data.session.id
+                }
+              };
               resolve([res,200,httpRes])
             }
           },
@@ -90,13 +95,18 @@ module.exports={
   signOut:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='signOut';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       if(!data.session.account){
         var res={api:data.api,val:'未登录'};
         reject([res,300,httpRes]);
       }
       else{
-        var res={api:data.api,val:data.session.account};
+        var res={
+          api:data.api,
+          val:{
+            account:data.session.account
+          }
+        };
         data.session.authority=undefined;
         data.session.account=undefined;
         resolve([res,200,httpRes])
@@ -111,7 +121,7 @@ module.exports={
   getAuthority:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getAuthority';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       if(!data.session.authority){
         var res={api:data.api,val:'未登录'};
         reject([res,300,httpRes]);
@@ -132,7 +142,7 @@ module.exports={
   setAuthority:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='setAuthority';
-      console.log(Date()+' - '+log);
+      console.log('  '+Date()+' - '+log);
       if(!data.session.authority){
         var res={api:data.api,val:'未登录'};
         reject([res,300,httpRes]);
@@ -146,11 +156,19 @@ module.exports={
     })
   },
 
+  /**
+   * 获取静态信息
+   * @param {*} param0 
+   */
   getStaticData:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getStaticData';
-      console.log(Date()+' - '+log);
-      var cmd=`select * from ${data.tableName}`;
+      console.log('  '+Date()+' - '+log);
+      // 参数是否有效
+      if(!(data.val instanceof Array)){
+        dao.reject(data.api,'参数无效',reject,httpRes);
+      }
+      var cmd=`select * from ${data.val.join(';select * from ')}`;
       global.dbQuery(cmd)
       .then(
         data0 => resolve([{api:data.api,val:data0},200,httpRes]),
