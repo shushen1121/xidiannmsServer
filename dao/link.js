@@ -236,11 +236,11 @@ const dao={
       else{
         // addWarning
         if(data.api=='addWarning'){
-          var prop=`Link_status='2'`;
+          var prop=`link_status='1'`;
         }
         // deleteWarning
         else if(data.api=='deleteWarning'){
-          var prop=`Link_status='1'`;
+          var prop=`link_status='2'`;
         }
 
         var warning_aim_id=[];

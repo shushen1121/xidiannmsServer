@@ -82,7 +82,7 @@ module.exports=function(app){
     ctl_staticData(req, res);
   })
   app.post('/staticLink_status',function(req, res){
-    req.tableName='link_status';
+    req.tableName='status';
     ctl_staticData(req, res);
   })
   app.post('/staticLink_type',function(req, res){
