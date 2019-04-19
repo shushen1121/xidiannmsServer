@@ -4,7 +4,7 @@ const warningDao=require('../../dao/warning'),
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={api:'addWarning',val:req.body.data};
+  var data={api:'/addWarning',val:req.body.data};
   // 增加告警
   warningDao.add([ data, undefined, res ])
   // 查询告警 & HTTP响应

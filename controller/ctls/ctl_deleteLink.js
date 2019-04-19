@@ -3,7 +3,7 @@ const linkDao=require('../../dao/link'),
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={api:'deleteLink',val:req.body.id};
+  var data={api:'/deleteLink',val:req.body.id};
   // 查找链路
   linkDao.get([ data, undefined, res ])
   // 删除告警(byWarning)

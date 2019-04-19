@@ -2,7 +2,7 @@ const machineDao=require('../../dao/machine'),
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={api:'changeMachineDetail',val:req.body.data};
+  var data={api:'/changeMachineDetail',val:req.body.data};
   // 修改设备详情
   machineDao.changeDetail([ data, undefined, res ])
   // 查询链路 & HTTP响应

@@ -4,7 +4,7 @@ const warningDao=require('../../dao/warning'),
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={api:'deleteWarning',val:req.body.id};
+  var data={api:'/deleteWarning',val:req.body.id};
   // 查找告警
   warningDao.get([ data, undefined, res ])
   // 修改链路/设备告警标识

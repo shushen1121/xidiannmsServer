@@ -4,7 +4,7 @@ const machineDao=require('../../dao/machine'),
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={api:'deleteMachine',val:req.body.id};
+  var data={api:'/deleteMachine',val:req.body.id};
   // 查找设备
   machineDao.get([ data, undefined, res ])
   // 删除设备(ByMachine)

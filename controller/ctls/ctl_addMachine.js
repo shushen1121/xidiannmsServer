@@ -2,7 +2,7 @@ const machineDao=require('../../dao/machine'),
       otherDao=require('../../dao/other');
 
 module.exports=function(req,res){
-  var data={api:'addMachine',val:req.body.data};
+  var data={api:'/addMachine',val:req.body.data};
   // 增加设备
   machineDao.add([ data, undefined, res ])
   // 查询设备 & HTTP响应
