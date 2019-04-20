@@ -44,6 +44,10 @@ const dao={
       }
     })
   },
+  /**
+   * 查询链路(ByMachineId)
+   * @param {*} param0 
+   */
   getByMachineId:function([data,code,httpRes]){
     return new Promise(function(resolve,reject){
       var log='getLinkByMachineId';
