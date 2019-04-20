@@ -10,10 +10,10 @@ module.exports={
       console.log('  '+Date()+' - '+log);
       var resData={
         code,
-        data,
+        data:data.val,
         message:code==200?'success':'error'
       }
-      httpRes.resJson(resData);
+      httpRes.json(resData);
     })
   },
 

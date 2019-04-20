@@ -31,9 +31,6 @@ app.use('/',express.static('public'));
 // 过滤器
 const filter=require('./middleware/filter');
 app.use(filter);
-// 响应格式化
-const format=require('./middleware/resFormat');
-app.use(format);
 // API
 const route=require('./middleware/route')(app);
 
