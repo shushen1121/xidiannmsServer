@@ -25,7 +25,7 @@ module.exports=function(req,res){
   .then(
     data => Promise.race([
       otherDao.httpRes(data),
-      otherDao.wsSend_warning(data)
+      otherDao.  wsSend_inform(data)
     ]),
     otherDao.httpRes
   )

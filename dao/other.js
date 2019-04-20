@@ -17,19 +17,7 @@ module.exports={
   },
 
   /**
-   * 告警推送
-   * @param {*} param0 
-   */
-  wsSend_warning:function([data,code,httpRes]){
-    return new Promise(function(resolve,reject){
-      var log='wsSend_warning';
-      console.log('  '+Date()+' - '+log);
-      global.EventEmitter.emit('wsWarning',data);
-    })
-  },
-
-  /**
-   * 拓扑修改推送/详情修改推送
+   * webSocket推送
    * @param {*} param0 
    */
   wsSend_inform:function([data,code,httpRes]){

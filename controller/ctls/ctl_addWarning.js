@@ -28,6 +28,6 @@ module.exports=function(req,res){
   )
   // 告警推送
   .then(
-    otherDao.wsSend_warning
+    otherDao.  wsSend_inform
   )
 }
