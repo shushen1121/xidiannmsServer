@@ -1,22 +1,26 @@
-const strUtil=require('../utils/strUtil');
+const strUtil=require('../../utils/strUtil');
 const sql={
   getAll:()=>{
-    return `select * from machine`;
+    return `select a.*, b.description as machine_type_description 
+    from machine a, machine_type b `;
   },
-  getById:(id)=>{
-    return `select * from machine where machine_id in (${id.join(',')})`;
+  getByIds:(id)=>{
+    return sql.getAll() + `where machine_id in (${id.join(',')})`;
   },
-  add:(data)=>{
+  insert:(data)=>{
     return `insert into machine ${strUtil.jsObjToSQLProp_insert(data)}`;
   },
   deleteAll:()=>{
-    return `delete from machine`;
+    return `delete from machine `;
   },
-  deleteById:(id)=>{
-    return `delete from machine where machine_id in (${id.join(',')})`;
+  deleteByIds:(ids)=>{
+    return sql.deleteAll() + `where machine_id in (${ids.join(',')})`;
   },
-  change:(data)=>{
-    return `update machine set ${strUtil.jsObjToSQLProp_update(data)} where machine_id=${data.link_id}`;
+  updateById:(data)=>{
+    return `update machine set ${strUtil.jsObjToSQLProp_update(data.val)} where machine_id=${data.link_id}`;
+  },
+  updateByIds:(prop, ids)=>{
+    return `update machine set ${prop} where machine_id in (${ids.join(',')})`;
   }
 }
 module.exports=sql;

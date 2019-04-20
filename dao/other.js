@@ -1,3 +1,4 @@
+const otherSql=require('./SQLString/other');
 module.exports={
   /**
    * HTTP响应
@@ -42,7 +43,9 @@ module.exports={
         reject([res,300,httpRes]);
       }
       else{
-        var cmd=`select password,authority from account where account='${data.val.account}'`;
+        // var cmd=`select password,authority from account where account='${data.val.account}'`;
+        var cmd = otherSql.getPassword_and_Authority(data.val.account);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => {
@@ -156,7 +159,9 @@ module.exports={
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
       }
-      var cmd=`select * from ${data.val.join(';select * from ')}`;
+      // var cmd=`select * from ${data.val.join(';select * from ')}`;
+      var cmd = otherSql.getTable(data.val);
+      console.log(cmd);
       global.dbQuery(cmd)
       .then(
         data0 => resolve([{api:data.api,val:data0},200,httpRes]),

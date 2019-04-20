@@ -1,4 +1,4 @@
-const strUtil=require('../utils/strUtil');
+const strUtil=require('../../utils/strUtil');
 const sql={
   getPassword_and_Authority:(account)=>{
     return `select password,authority from account where account='${account}'`;

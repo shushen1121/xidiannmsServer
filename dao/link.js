@@ -1,4 +1,6 @@
+const linkSql=require('./SQLString/link');
 const strUtil=require('../utils/strUtil');
+const warningSql=require('./SQLString/warning');
 const dao={
   resolve:function(api,data,resolve,httpRes){
     var res={api,val:data};
@@ -22,7 +24,8 @@ const dao={
       }
       // 获取所有链路
       else if(data.val.length==0){
-        var cmd=`select * from link`;
+        var cmd=linkSql.getAll();
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -31,7 +34,8 @@ const dao={
       }
       // 获取指定链路
       else{
-        var cmd=`select * from link where link_id in (${data.val.join(',')})`;
+        var cmd=linkSql.getByIds(data.val);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -54,7 +58,8 @@ const dao={
       }
       // 获取指定链路
       else{
-        var cmd=`select * from link where from_machine in (${data.val.join(',')}) or to_machine in (${data.val.join(',')})`;
+        var cmd=linkSql.getByMachineIds(data.val);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -77,8 +82,8 @@ const dao={
       }
       // 新增设备
       else{
-        var prop=strUtil.jsObjToSQLProp_insert(data.val);
-        var cmd = `insert into link ${prop}`;
+        var cmd = linkSql.insert(data);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0.insertId,resolve,httpRes),
@@ -106,7 +111,8 @@ const dao={
       }
       // 删除指定链路
       else{
-        var cmd=`delete from link where link_id in (${data.val.join(',')})`;
+        var cmd=linkSql.deleteByIds(data.val);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data.val,resolve,httpRes),
@@ -134,7 +140,8 @@ const dao={
         for(var i=0;i<data.val.length;i++){
           warning_id.push(data.val[i].warning_id);
         }
-        var cmd=`delete from warning where warning_id in (${warning_id.join(',')})`;
+        var cmd=warningSql.deleteByIds(warning_id);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,warning_id,resolve,httpRes),
@@ -158,7 +165,8 @@ const dao={
       }
       // 删除指定设备
       else{
-        var cmd=`delete from link where from_machine in (${data.val.join(',')}) or to_machine in (${data.val.join(',')})`;
+        var cmd=linkSql.deleteByMachineIds(data.val);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           // Debug
@@ -187,7 +195,8 @@ const dao={
         for(var i=0;i<data.val.length;i++){
           link_id.push(data.val[i].link_id);
         }
-        var cmd=`delete from link where link_id in (${link_id.join(',')})`;
+        var cmd=linkSql.deleteByIds(link_id);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,link_id,resolve,httpRes),
@@ -210,8 +219,8 @@ const dao={
         dao.reject(data.api,'参数无效',reject,httpRes);
       }
       else{
-        var prop=strUtil.jsObjToSQLProp_update(data.val);
-        var cmd=`update link set ${prop} where link_id=${data.val.link_id}`;
+        var cmd= linkSql.updateById(data);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,[data.val.link_id],resolve,httpRes),
@@ -255,7 +264,8 @@ const dao={
         }
         // [···]
         else{
-          var cmd=`update link set ${prop} where link_id in (${warning_aim_id.join(',')})`;
+          var cmd=linkSql.updateByIds(prop, warning_aim_id);
+          console.log(cmd);
           global.dbQuery(cmd)
           .then(
             data0 => dao.resolve(data.api,data.val,resolve,httpRes),

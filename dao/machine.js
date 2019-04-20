@@ -1,4 +1,5 @@
 const strUtil=require('../utils/strUtil');
+const machineSql=require('./SQLString/machine');
 const dao={
   resolve:function(api,data,resolve,httpRes){
     var res={api,val:data};
@@ -22,7 +23,8 @@ const dao={
       }
       // 获取所有设备
       else if(data.val.length==0){
-        var cmd=`select * from machine`;
+        var cmd = machineSql.getAll();
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -31,7 +33,8 @@ const dao={
       }
       // 获取指定设备
       else{
-        var cmd=`select * from machine where machine_id in (${data.val.join(',')})`;
+        var cmd = machineSql.getByIds(data.val);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -55,8 +58,8 @@ const dao={
       }
       // 新增设备
       else{
-        var prop=strUtil.jsObjToSQLProp_insert(data.val);
-        var cmd = `insert into machine ${prop}`;
+        var cmd = machineSql.insert(data.val);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0.insertId,resolve,httpRes),
@@ -95,7 +98,8 @@ const dao={
         for(var i=0;i<data.val.length;i++){
           machine_id.push(data.val[i].machine_id);
         }
-        var cmd=`delete from machine where machine_id in (${machine_id.join(',')})`;
+        var cmd = machineSql.deleteByIds(machine_id);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,machine_id,resolve,httpRes),
@@ -118,8 +122,8 @@ const dao={
         dao.reject(data.api,'参数无效',reject,httpRes);
       }
       else{
-        var prop=strUtil.jsObjToSQLProp_update(data.val);
-        var cmd=`update machine set ${prop} where machine_id=${data.val.machine_id}`;
+        var cmd=machineSql.updateById(data);
+        console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,[data.val.machine_id],resolve,httpRes),
@@ -163,7 +167,8 @@ const dao={
         }
         // [···]
         else{
-          var cmd=`update machine set ${prop} where machine_id in (${warning_aim_id.join(',')})`;
+          var cmd=machineSql.updateByIds(prop, warning_aim_id);
+          console.log(cmd);
           global.dbQuery(cmd)
           .then(
             data0 => dao.resolve(data.api,data.val,resolve,httpRes),

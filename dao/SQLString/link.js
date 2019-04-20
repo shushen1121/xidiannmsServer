@@ -1,28 +1,35 @@
-const strUtil=require('../utils/strUtil');
+const strUtil=require('../../utils/strUtil');
 const sql={
   getAll:()=>{
-    return `select * from link`;
+    return `SELECT a.*, 
+    b.name AS from_machine_name, 
+    (SELECT c.name FROM machine c WHERE a.to_machine = c.machine_id) AS to_machine_name 
+    FROM link a, machine b 
+    WHERE a.from_machine = b.machine_id `;
   },
-  getById:(id)=>{
-    return `select * from link where link_id in (${id.join(',')})`;
+  getByIds:(ids)=>{
+    return sql.getAll() + `and link_id in (${ids.join(',')})`;
   },
-  getByMachineId:(id)=>{
-    return `select * from link where from_machine in (${id.join(',')}) or to_machine in (${id.join(',')})`;
+  getByMachineIds:(ids)=>{
+    return sql.getAll() + `and from_machine in (${ids.join(',')}) or to_machine in (${ids.join(',')})`;
   },
-  add:(data)=>{
-    return `insert into link ${strUtil.jsObjToSQLProp_insert(data)}`;
+  insert:(data)=>{
+    return `insert into link ${strUtil.jsObjToSQLProp_insert(data.val)}`;
   },
   deleteAll:()=>{
-    return `delete from link`;
+    return `delete from link `;
   },
-  deleteById:(id)=>{
-    return `delete from link where link_id in (${id.join(',')})`;
+  deleteByIds:(ids)=>{
+    return sql.deleteAll() + `where link_id in (${ids.join(',')})`;
   },
-  deleteByMachine:(id)=>{
-    return `delete from link where from_machine in (${id.join(',')}) or to_machine in (${id.join(',')})`;
+  deleteByMachineIds:(ids)=>{
+    return sql.deleteAll() + `where from_machine in (${id.join(',')}) or to_machine in (${id.join(',')})`;
   },
-  change:(data)=>{
-    return `update link set ${strUtil.jsObjToSQLProp_update(data)} where link_id=${data.link_id}`;
+  updateById:(data)=>{
+    return `update link set ${strUtil.jsObjToSQLProp_update(data.val)} where link_id=${data.link_id}`;
+  },
+  updateByIds:(prop, ids)=>{
+    return `update link set ${prop} where link_id in (${ids.join(',')})`
   }
 }
 module.exports=sql;
