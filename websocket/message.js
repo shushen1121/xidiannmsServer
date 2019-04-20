@@ -34,10 +34,9 @@ module.exports=function(ws){
       }else{
         wsRes={ code:200, message:'token', data:'获取权限成功' };
         ws.token=data.token;
+        global.ws.push(ws);
       }
       ws.send(JSON.stringify(wsRes));
-
-      global.ws.push(ws);
     }
   });
 }
