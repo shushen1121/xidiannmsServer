@@ -17,9 +17,9 @@ xidian Network Management System Server<br>
 "ws": "^6.2.1"
 ```
 # 结构
-* [流程](/README/flow)
-* [方法](/README/function)
+* [流程](/README/flow.md)
+* [方法](/README/function.md)
 
 # API
-* [http](/README/api)
-* [webSocket](/README/socket)
+* [http](/README/api.md)
+* [webSocket](/README/socket.md)
