@@ -17,7 +17,8 @@ const sql={
     return sql.deleteAll() + `where machine_id in (${ids.join(',')})`;
   },
   updateById:(data)=>{
-    return `update machine set ${strUtil.jsObjToSQLProp_update(data.val)} where machine_id=${data.link_id}`;
+    console.log(data)
+    return `update machine set ${strUtil.jsObjToSQLProp_update(data.val)} where machine_id=${data.val.machine_id}`;
   },
   updateByIds:(prop, ids)=>{
     return `update machine set ${prop} where machine_id in (${ids.join(',')})`;
