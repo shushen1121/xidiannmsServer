@@ -24,7 +24,7 @@ const dao={
       // 获取所有告警
       else if(data.val.length==0){
         var cmd=warningSql.getAll();
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -34,7 +34,7 @@ const dao={
       // 获取指定告警
       else{
         var cmd=warningSql.getByIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -59,7 +59,7 @@ const dao={
       // 新增告警
       else{
         var cmd = warningSql.insert(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,[data0.insertId],resolve,httpRes),
@@ -84,7 +84,7 @@ const dao={
       // 删除所有告警
       else if(data.val.length==0){
         var cmd=warningSql.deleteAll();
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data.val,resolve,httpRes),
@@ -94,7 +94,7 @@ const dao={
       // 删除指定告警
       else{
         var cmd=warningSql.deleteByIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data.val,resolve,httpRes),
@@ -123,7 +123,7 @@ const dao={
           warning_id.push(data.val[i].warning_id);
         }
         var cmd=warningSql.deleteByIds(warning_id);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,warning_id,resolve,httpRes),
@@ -152,7 +152,7 @@ const dao={
       else{
         // var cmd=`delete from warning where warning_aim_id in (${data.val.join(',')}) and warning_aim='link'`;
         var cmd=warningSql.deleteByAimIds('link', data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -181,7 +181,7 @@ const dao={
       else{
         // var cmd=`delete from warning where warning_aim_id in (${data.val.join(',')}) and warning_aim='machine'`;
         var cmd = warningSql.deleteByAimIds('machine', data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),

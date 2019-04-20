@@ -45,7 +45,7 @@ module.exports={
       else{
         // var cmd=`select password,authority from account where account='${data.val.account}'`;
         var cmd = otherSql.getPassword_and_Authority(data.val.account);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => {
@@ -161,7 +161,7 @@ module.exports={
       }
       // var cmd=`select * from ${data.val.join(';select * from ')}`;
       var cmd = otherSql.getTable(data.val);
-      console.log(cmd);
+      // console.log(cmd);
       global.dbQuery(cmd)
       .then(
         data0 => resolve([{api:data.api,val:data0},200,httpRes]),

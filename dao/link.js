@@ -25,7 +25,7 @@ const dao={
       // 获取所有链路
       else if(data.val.length==0){
         var cmd=linkSql.getAll();
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -35,7 +35,7 @@ const dao={
       // 获取指定链路
       else{
         var cmd=linkSql.getByIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -63,7 +63,7 @@ const dao={
       // 获取指定链路
       else{
         var cmd=linkSql.getByMachineIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -87,7 +87,7 @@ const dao={
       // 新增设备
       else{
         var cmd = linkSql.insert(data);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0.insertId,resolve,httpRes),
@@ -116,7 +116,7 @@ const dao={
       // 删除指定链路
       else{
         var cmd=linkSql.deleteByIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data.val,resolve,httpRes),
@@ -145,7 +145,7 @@ const dao={
           warning_id.push(data.val[i].warning_id);
         }
         var cmd=warningSql.deleteByIds(warning_id);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,warning_id,resolve,httpRes),
@@ -170,7 +170,7 @@ const dao={
       // 删除指定设备
       else{
         var cmd=linkSql.deleteByMachineIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           // Debug
@@ -200,7 +200,7 @@ const dao={
           link_id.push(data.val[i].link_id);
         }
         var cmd=linkSql.deleteByIds(link_id);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,link_id,resolve,httpRes),
@@ -224,7 +224,7 @@ const dao={
       }
       else{
         var cmd= linkSql.updateById(data);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,[data.val.link_id],resolve,httpRes),
@@ -269,7 +269,7 @@ const dao={
         // [···]
         else{
           var cmd=linkSql.updateByIds(prop, warning_aim_id);
-          console.log(cmd);
+          // console.log(cmd);
           global.dbQuery(cmd)
           .then(
             data0 => dao.resolve(data.api,data.val,resolve,httpRes),

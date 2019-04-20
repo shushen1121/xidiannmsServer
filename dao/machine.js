@@ -24,7 +24,7 @@ const dao={
       // 获取所有设备
       else if(data.val.length==0){
         var cmd = machineSql.getAll();
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -34,7 +34,7 @@ const dao={
       // 获取指定设备
       else{
         var cmd = machineSql.getByIds(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0,resolve,httpRes),
@@ -59,7 +59,7 @@ const dao={
       // 新增设备
       else{
         var cmd = machineSql.insert(data.val);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,data0.insertId,resolve,httpRes),
@@ -99,7 +99,7 @@ const dao={
           machine_id.push(data.val[i].machine_id);
         }
         var cmd = machineSql.deleteByIds(machine_id);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,machine_id,resolve,httpRes),
@@ -123,7 +123,7 @@ const dao={
       }
       else{
         var cmd=machineSql.updateById(data);
-        console.log(cmd);
+        // console.log(cmd);
         global.dbQuery(cmd)
         .then(
           data0 => dao.resolve(data.api,[data.val.machine_id],resolve,httpRes),
@@ -168,7 +168,7 @@ const dao={
         // [···]
         else{
           var cmd=machineSql.updateByIds(prop, warning_aim_id);
-          console.log(cmd);
+          // console.log(cmd);
           global.dbQuery(cmd)
           .then(
             data0 => dao.resolve(data.api,data.val,resolve,httpRes),
