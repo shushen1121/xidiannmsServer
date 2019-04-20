@@ -1,3 +1,5 @@
+#### http
+```js
 // 登录
 const signIn = (req, res) => {
   const method = 'POST',
@@ -8,7 +10,7 @@ const signIn = (req, res) => {
         },
         res = {
           code: 200,
-          message: '登录成功',
+          message: 'success',
           data: {
             sessionId: String
           }
@@ -22,10 +24,24 @@ const signOut = (req, res) => {
         req = {},
         res = {
           code: 200,
-          message: '退出成功',
+          message: 'success',
           data: {
             account: String
           }
+        }
+}
+
+// 获取静态表
+const getMachine = (req, res) => {
+  const method = 'POST',
+        api = '/staticData',
+        req = {
+          data: []
+        },
+        res = {
+          code: 200,
+          message: 'success',
+          data: []
         }
 }
 
@@ -38,7 +54,7 @@ const getMachine = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -52,7 +68,7 @@ const getLink = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 };
@@ -66,7 +82,7 @@ const getWarning = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -80,7 +96,7 @@ const deleteMachine = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -94,7 +110,7 @@ const deleteLink = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 };
@@ -108,7 +124,7 @@ const deleteWarning = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -122,7 +138,7 @@ const addMachine = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -136,7 +152,7 @@ const addLink = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 };
@@ -150,7 +166,7 @@ const addWarning = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -164,7 +180,7 @@ const changeMachineDetail = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 }
@@ -178,7 +194,8 @@ const changeLinkDetail = (req, res) => {
         },
         res = {
           code: 200,
-          message: '查询成功',
+          message: 'success',
           data: []
         }
 };
+```
