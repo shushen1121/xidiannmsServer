@@ -244,11 +244,11 @@ const dao={
       }
       else{
         // addWarning
-        if(data.api=='addWarning'){
+        if(data.api=='/addWarning'){
           var prop=`link_status='1'`;
         }
         // deleteWarning
-        else if(data.api=='deleteWarning'){
+        else if(data.api=='/deleteWarning'){
           var prop=`link_status='2'`;
         }
 

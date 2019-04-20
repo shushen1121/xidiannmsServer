@@ -147,11 +147,11 @@ const dao={
       }
       else{
         // addWarning
-        if(data.api=='addWarning'){
+        if(data.api=='/addWarning'){
           var prop=`machine_status='1'`;
         }
         // deleteWarning
-        else if(data.api=='deleteWarning'){
+        else if(data.api=='/deleteWarning'){
           var prop=`machine_status='2'`;
         }
 
