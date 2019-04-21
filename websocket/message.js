@@ -33,8 +33,10 @@ module.exports=function(ws){
         wsRes={ code:300, message:'token', data:'无权限连接' };
       }else{
         wsRes={ code:200, message:'token', data:'获取权限成功' };
-        ws.token=data.token;
-        global.ws.push(ws);
+        const result = global.ws.filter(item => item.token !== data.token);
+        ws.token = data.token;
+        result.push(ws);
+        global.ws = result;
       }
       ws.send(JSON.stringify(wsRes));
     }
