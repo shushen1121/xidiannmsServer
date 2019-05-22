@@ -12,7 +12,7 @@ const sql={
     return sql.getAll() + `and link_id in (${ids.join(',')})`;
   },
   getByMachineIds:(ids)=>{
-    return sql.getAll() + `and ( from_machine in (${ids.join(',')}) or to_machine in (${ids.join(',')}) )`;
+    return `SELECT * FROM link WHERE from_machine in (${ids.join(',')}) or to_machine in (${ids.join(',')})`;
   },
   insert:(data)=>{
     return `insert into link ${strUtil.jsObjToSQLProp_insert(data.val)}`;
