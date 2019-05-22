@@ -193,6 +193,9 @@ const dao={
       if(!(data.val instanceof Array)){
         dao.reject(data.api,'参数无效',reject,httpRes);
       }
+      else if(data.val.length==0){
+        dao.resolve(data.api,data.val,resolve,httpRes)
+      }
       // 删除指定设备
       else{
         var link_id=[];

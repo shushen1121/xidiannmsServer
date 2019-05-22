@@ -146,7 +146,7 @@ const dao={
         dao.reject(data.api,'参数无效',reject,httpRes);
       }
       else if(data.val.length==0){
-        dao.resolve(data.api,data0,resolve,httpRes)
+        dao.resolve(data.api,data.val,resolve,httpRes)
       }
       // 删除指定告警
       else{

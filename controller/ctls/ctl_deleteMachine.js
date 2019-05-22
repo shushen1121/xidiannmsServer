@@ -19,7 +19,9 @@ module.exports=function(req,res){
     ]),
     otherDao.httpRes
   )
-  .then(otherDao.wsSend_inform)
+  .then(
+    (data) => otherDao.wsSend_inform(data[0])
+  )
 }
 
 function deleteLink(data){

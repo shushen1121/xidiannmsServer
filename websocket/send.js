@@ -48,7 +48,7 @@ module.exports=function(){
     }
     for(var i=0;i<global.ws.length;i++){
       var ws=global.ws[i];
-      if(ws.token){
+      if(ws.token&&ws.readyState==1){
         ws.send(JSON.stringify(wsData));
       }
     }

@@ -48,7 +48,7 @@ module.exports=function(){
     }
     for(var i=0;i<global.io.length;i++){
       var socket=global.io[i];
-      if(socket.token){
+      if(socket.token&&ws.readyState==1){
         socket.send(JSON.stringify(wsData));
       }
     }
